@@ -27,6 +27,7 @@
     font-family: 'Nunito Sans', sans-serif;
     background: var(--gris-fondo);
     color: var(--texto);
+    position: relative;
   }
 
   /* fondo con bon yurts decorativos */
@@ -38,7 +39,9 @@
     background-size: 28px 28px;
   }
   .bg-shapes {
-    position: fixed; inset: 0; z-index: -1;
+    position: absolute; top:0; left:0;
+    width:100%; height:100%;
+    z-index: -1;
     pointer-events: none; overflow: hidden;
   }
   .bg-shape {
@@ -49,21 +52,37 @@
     opacity: 0.13;
     filter: grayscale(30%) hue-rotate(200deg);
   }
-  .bs1 { width:280px;height:350px; top:-60px;   left:-50px;   transform:rotate(-20deg); }
-  .bs2 { width:220px;height:280px; top:22%;     right:-40px;  transform:rotate(18deg);  opacity:0.11; }
-  .bs3 { width:200px;height:250px; top:55%;     left:-45px;   transform:rotate(12deg);  opacity:0.10; }
-  .bs4 { width:190px;height:240px; bottom:4%;   right:-30px;  transform:rotate(-20deg); opacity:0.11; }
-  .bs5 { width:160px;height:200px; top:42%;     left:44%;     transform:rotate(25deg);  opacity:0.07; }
-  .bs6 { width:210px;height:265px; bottom:20%;  left:-35px;   transform:rotate(-15deg); opacity:0.10; }
-  .bs7 { width:200px;height:250px; top:10%;     right:-35px;  transform:rotate(-12deg); opacity:0.10; }
+  /* Izquierda arriba */
+  .bs1 { width:200px;height:250px; top:5%;    left:-30px;  transform:rotate(-20deg); }
+  /* Derecha arriba */
+  .bs2 { width:180px;height:225px; top:8%;    right:-25px; transform:rotate(15deg);  opacity:0.11; }
+  /* Izquierda 25% */
+  .bs3 { width:170px;height:215px; top:23%;   left:-25px;  transform:rotate(12deg);  opacity:0.10; }
+  /* Derecha 30% */
+  .bs4 { width:160px;height:200px; top:32%;   right:-20px; transform:rotate(-18deg); opacity:0.11; }
+  /* Izquierda 50% */
+  .bs5 { width:175px;height:220px; top:50%;   left:-30px;  transform:rotate(-10deg); opacity:0.10; }
+  /* Derecha 55% */
+  .bs6 { width:165px;height:205px; top:58%;   right:-25px; transform:rotate(20deg);  opacity:0.10; }
+  /* Izquierda 75% */
+  .bs7 { width:170px;height:215px; top:75%;   left:-20px;  transform:rotate(8deg);   opacity:0.10; }
+  /* Derecha 80% */
+  .bs8 { width:160px;height:200px; top:82%;   right:-20px; transform:rotate(-15deg); opacity:0.09; }
+  /* Centro ocasional */
+  .bs9  { width:140px;height:175px; top:42%;  left:44%;    transform:rotate(25deg);  opacity:0.06; }
+  /* Centro izquierda */
+  .bs10 { width:130px;height:165px; top:15%;  left:22%;    transform:rotate(-30deg); opacity:0.055; }
+  /* Centro derecha */
+  .bs11 { width:125px;height:155px; top:28%;  right:20%;   transform:rotate(22deg);  opacity:0.05; }
+  /* Centro bajo izq */
+  .bs12 { width:135px;height:170px; top:65%;  left:18%;    transform:rotate(15deg);  opacity:0.055; }
+  /* Centro bajo der */
+  .bs13 { width:130px;height:160px; top:72%;  right:22%;   transform:rotate(-20deg); opacity:0.05; }
+  /* Muy centro alto */
+  .bs14 { width:120px;height:150px; top:55%;  left:58%;    transform:rotate(35deg);  opacity:0.045; }
   @media (max-width:600px) {
-    .bs1 { width:120px;height:150px; }
-    .bs2 { width:100px;height:125px; }
-    .bs3 { width:90px; height:115px; }
-    .bs4 { width:90px; height:115px; }
-    .bs5 { display:none; }
-    .bs6 { width:100px;height:125px; }
-    .bs7 { width:95px; height:120px; }
+    .bg-shape { width:90px !important; height:115px !important; }
+    .bs9,.bs10,.bs11,.bs12,.bs13,.bs14 { display:none; }
   }
 
   /* ── TOPBAR ── */
@@ -541,6 +560,13 @@
   <div class="bg-shape bs5"></div>
   <div class="bg-shape bs6"></div>
   <div class="bg-shape bs7"></div>
+  <div class="bg-shape bs8"></div>
+  <div class="bg-shape bs9"></div>
+  <div class="bg-shape bs10"></div>
+  <div class="bg-shape bs11"></div>
+  <div class="bg-shape bs12"></div>
+  <div class="bg-shape bs13"></div>
+  <div class="bg-shape bs14"></div>
 </div>
 
 <!-- TOPBAR -->
