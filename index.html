@@ -348,7 +348,7 @@
   <div class="hero-circle hc3"></div>
   <div class="hero-inner">
     <div class="hero-chip">
-      <i class="ti ti-flask"></i>
+      <i class="fa-solid fa-flask"></i>
       Gestión del Cambio · Kick Off Pruebas 2026
     </div>
     <h1>Centro de<br>Pruebas <span class="alt">ALMA</span></h1>
@@ -356,10 +356,10 @@
       "Cada prueba cuenta. Cada rol suma. Cada hallazgo nos acerca a una operación más segura."
     </p>
     <div class="hero-pills">
-      <span class="pill"><i class="ti ti-map-pin"></i> Colombia</span>
-      <span class="pill"><i class="ti ti-map-pin"></i> Ecuador</span>
-      <span class="pill"><i class="ti ti-map-pin"></i> Venezuela</span>
-      <span class="pill"><i class="ti ti-calendar"></i> Mayo – Junio 2026</span>
+      <span class="pill"><i class="fa-solid fa-location-dot"></i> Colombia</span>
+      <span class="pill"><i class="fa-solid fa-location-dot"></i> Ecuador</span>
+      <span class="pill"><i class="fa-solid fa-location-dot"></i> Venezuela</span>
+      <span class="pill"><i class="fa-solid fa-calendar"></i> Mayo – Junio 2026</span>
     </div>
   </div>
 </section>
@@ -367,20 +367,20 @@
 <!-- NAV -->
 <nav class="nav">
   <button class="nav-btn active" onclick="showTab('agenda', this)">
-    <i class="ti ti-calendar-event"></i> Agenda y Gantt
+    <i class="fa-solid fa-calendar-days"></i> Agenda y Gantt
   </button>
   <button class="nav-btn" onclick="showTab('participantes', this)">
-    <i class="ti ti-users"></i> Participantes
+    <i class="fa-solid fa-users"></i> Participantes
   </button>
   <button class="nav-btn" onclick="showTab('roles', this)">
-    <i class="ti ti-shield-check"></i> Roles y Soporte
+    <i class="fa-solid fa-shield-halved"></i> Roles y Soporte
   </button>
 </nav>
 
 <!-- ══ AGENDA ══ -->
 <div id="agenda" class="section active">
   <div class="sec-header">
-    <div class="sec-icon"><i class="ti ti-calendar-event"></i></div>
+    <div class="sec-icon"><i class="fa-solid fa-calendar-days"></i></div>
     <div>
       <h2>Plan de Pruebas</h2>
       <p>Tres momentos clave · Mayo 25 – Junio 30, 2026</p>
@@ -389,7 +389,7 @@
 
   <div class="gantt-wrap">
     <div class="gantt-head-bar">
-      <i class="ti ti-chart-gantt"></i>
+      <i class="fa-solid fa-chart-gantt"></i>
       <h3>Diagrama de Gantt · Cronograma de Pruebas</h3>
     </div>
     <div class="gantt-scroll">
@@ -408,7 +408,7 @@
   </div>
 
   <div class="sec-header">
-    <div class="sec-icon"><i class="ti ti-timeline"></i></div>
+    <div class="sec-icon"><i class="fa-solid fa-list-check"></i></div>
     <div>
       <h2>Los 3 Momentos</h2>
       <p>Detalle de cada fase del plan de pruebas</p>
@@ -456,7 +456,7 @@
 <!-- ══ PARTICIPANTES ══ -->
 <div id="participantes" class="section">
   <div class="sec-header">
-    <div class="sec-icon"><i class="ti ti-users"></i></div>
+    <div class="sec-icon"><i class="fa-solid fa-users"></i></div>
     <div>
       <h2>Participantes</h2>
       <p>Equipo de testers, embajadores y gestores por área y país</p>
@@ -464,22 +464,22 @@
   </div>
   <div class="filter-row">
     <button class="fbtn active" onclick="filtrar('todos',this)">
-      <i class="ti ti-layout-grid"></i> Todos
+      <i class="fa-solid fa-table-cells"></i> Todos
     </button>
     <button class="fbtn" onclick="filtrar('Finanzas',this)">
-      <i class="ti ti-coin"></i> Finanzas
+      <i class="fa-solid fa-coins"></i> Finanzas
     </button>
     <button class="fbtn" onclick="filtrar('Operaciones',this)">
-      <i class="ti ti-settings"></i> Operaciones
+      <i class="fa-solid fa-gear"></i> Operaciones
     </button>
     <button class="fbtn" onclick="filtrar('Nómina',this)">
-      <i class="ti ti-file-invoice"></i> Nómina
+      <i class="fa-solid fa-file-invoice"></i> Nómina
     </button>
     <button class="fbtn" onclick="filtrar('Comercial',this)">
-      <i class="ti ti-building-store"></i> Comercial
+      <i class="fa-solid fa-store"></i> Comercial
     </button>
     <button class="fbtn" onclick="filtrar('Retail',this)">
-      <i class="ti ti-shopping-cart"></i> Retail
+      <i class="fa-solid fa-cart-shopping"></i> Retail
     </button>
   </div>
   <div class="p-grid" id="pGrid"></div>
@@ -488,7 +488,7 @@
 <!-- ══ ROLES ══ -->
 <div id="roles" class="section">
   <div class="sec-header">
-    <div class="sec-icon"><i class="ti ti-shield-check"></i></div>
+    <div class="sec-icon"><i class="fa-solid fa-shield-halved"></i></div>
     <div>
       <h2>Roles y Soporte</h2>
       <p>¿Qué hace cada perfil y dónde encontrar ayuda?</p>
@@ -496,7 +496,7 @@
   </div>
   <div class="roles-grid">
     <div class="role-card">
-      <div class="role-icon"><i class="ti ti-award"></i></div>
+      <div class="role-icon"><i class="fa-solid fa-award"></i></div>
       <h3>Embajador</h3>
       <ul>
         <li>Representa al área en el proceso de pruebas</li>
@@ -506,7 +506,7 @@
       </ul>
     </div>
     <div class="role-card">
-      <div class="role-icon"><i class="ti ti-test-pipe"></i></div>
+      <div class="role-icon"><i class="fa-solid fa-flask-vial"></i></div>
       <h3>Tester / Key User</h3>
       <ul>
         <li>Ejecuta los casos de prueba asignados</li>
@@ -516,7 +516,7 @@
       </ul>
     </div>
     <div class="role-card">
-      <div class="role-icon"><i class="ti ti-clipboard-list"></i></div>
+      <div class="role-icon"><i class="fa-solid fa-clipboard-list"></i></div>
       <h3>Gestor de Prueba</h3>
       <ul>
         <li>Coordina la ejecución del plan de pruebas</li>
@@ -526,7 +526,7 @@
       </ul>
     </div>
     <div class="role-card">
-      <div class="role-icon"><i class="ti ti-tool"></i></div>
+      <div class="role-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
       <h3>Equipo CDA / Consultor</h3>
       <ul>
         <li>Brinda soporte técnico durante las pruebas</li>
@@ -538,7 +538,7 @@
   </div>
 
   <div class="sec-header" style="margin-top:8px;">
-    <div class="sec-icon"><i class="ti ti-headset"></i></div>
+    <div class="sec-icon"><i class="fa-solid fa-headset"></i></div>
     <div>
       <h2>Canales de Soporte</h2>
       <p>¿Dónde pedir ayuda durante las pruebas?</p>
@@ -546,25 +546,25 @@
   </div>
   <div class="sop-grid">
     <div class="sop-card dark">
-      <div class="sop-icon"><i class="ti ti-message-circle"></i></div>
+      <div class="sop-icon"><i class="fa-solid fa-message"></i></div>
       <div class="sop-label">Canal principal</div>
       <div class="sop-title">Teams · Canal ALMA Pruebas</div>
       <div class="sop-detail">Dudas generales, avisos de bloqueos y comunicación del equipo extendido.</div>
     </div>
     <div class="sop-card mid">
-      <div class="sop-icon"><i class="ti ti-lifebuoy"></i></div>
+      <div class="sop-icon"><i class="fa-solid fa-life-ring"></i></div>
       <div class="sop-label">Soporte técnico</div>
       <div class="sop-title">Mesa de Ayuda CDA</div>
       <div class="sop-detail">Incidencias en SAP, accesos y errores técnicos durante la ejecución.</div>
     </div>
     <div class="sop-card light">
-      <div class="sop-icon"><i class="ti ti-user-check"></i></div>
+      <div class="sop-icon"><i class="fa-solid fa-user-check"></i></div>
       <div class="sop-label">Coordinación</div>
       <div class="sop-title">Gestor de Prueba por Área</div>
       <div class="sop-detail">Escalamiento de hallazgos y seguimiento del cronograma por área.</div>
     </div>
     <div class="sop-card light">
-      <div class="sop-icon"><i class="ti ti-clock"></i></div>
+      <div class="sop-icon"><i class="fa-solid fa-clock"></i></div>
       <div class="sop-label">Horario</div>
       <div class="sop-title">Lun – Vie · 8am a 6pm</div>
       <div class="sop-detail">Equipo disponible en cada franja de ejecución del plan de pruebas.</div>
@@ -573,13 +573,13 @@
 </div>
 
 <footer>
-  <i class="ti ti-point"></i>
+  <i class="fa-solid fa-circle"></i>
   Centro de Pruebas <strong>ALMA</strong>
-  <i class="ti ti-point"></i>
+  <i class="fa-solid fa-circle"></i>
   Proyecto SAP RISE
-  <i class="ti ti-point"></i>
+  <i class="fa-solid fa-circle"></i>
   Gestión del Cambio 2026
-  <i class="ti ti-point"></i>
+  <i class="fa-solid fa-circle"></i>
 </footer>
 
 <script>
@@ -610,7 +610,7 @@ function renderP(list) {
       <div class="p-name">${p.nombre}</div>
       <div class="p-rol">${p.rol}</div>
       <span class="p-area-tag">${p.area}</span>
-      <div class="p-pais"><i class="ti ti-map-pin"></i>${p.pais}</div>
+      <div class="p-pais"><i class="fa-solid fa-location-dot"></i>${p.pais}</div>
     </div>`).join('');
 }
 
