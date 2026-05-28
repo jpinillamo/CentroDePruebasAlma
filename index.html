@@ -49,13 +49,22 @@
     opacity: 0.13;
     filter: grayscale(30%) hue-rotate(200deg);
   }
-  .bs1 { width:320px;height:400px; top:-80px;  left:-60px;  transform:rotate(-25deg); }
-  .bs2 { width:260px;height:320px; top:30%;    right:-50px; transform:rotate(15deg);  opacity:0.11; }
-  .bs3 { width:200px;height:250px; bottom:5%;  left:8%;     transform:rotate(10deg);  opacity:0.10; }
-  .bs4 { width:180px;height:220px; bottom:10%; right:12%;   transform:rotate(-18deg); opacity:0.11; }
-  .bs5 { width:140px;height:175px; top:15%;    left:38%;    transform:rotate(30deg);  opacity:0.09; }
-  .bs6 { width:240px;height:300px; top:50%;    left:-40px;  transform:rotate(20deg);  opacity:0.10; }
-  .bs7 { width:220px;height:275px; top:55%;    right:-35px; transform:rotate(-22deg); opacity:0.10; }
+  .bs1 { width:280px;height:350px; top:-60px;   left:-50px;   transform:rotate(-20deg); }
+  .bs2 { width:220px;height:280px; top:22%;     right:-40px;  transform:rotate(18deg);  opacity:0.11; }
+  .bs3 { width:200px;height:250px; top:55%;     left:-45px;   transform:rotate(12deg);  opacity:0.10; }
+  .bs4 { width:190px;height:240px; bottom:4%;   right:-30px;  transform:rotate(-20deg); opacity:0.11; }
+  .bs5 { width:160px;height:200px; top:42%;     left:44%;     transform:rotate(25deg);  opacity:0.07; }
+  .bs6 { width:210px;height:265px; bottom:20%;  left:-35px;   transform:rotate(-15deg); opacity:0.10; }
+  .bs7 { width:200px;height:250px; top:10%;     right:-35px;  transform:rotate(-12deg); opacity:0.10; }
+  @media (max-width:600px) {
+    .bs1 { width:120px;height:150px; }
+    .bs2 { width:100px;height:125px; }
+    .bs3 { width:90px; height:115px; }
+    .bs4 { width:90px; height:115px; }
+    .bs5 { display:none; }
+    .bs6 { width:100px;height:125px; }
+    .bs7 { width:95px; height:120px; }
+  }
 
   /* ── TOPBAR ── */
   .topbar {
@@ -157,14 +166,27 @@
   .pill i { font-size:15px; }
 
   /* ── NAV ── */
+  .nav-wrapper { position:sticky;top:0;z-index:100; }
   .nav {
     background:white;
     border-bottom:2px solid var(--borde);
     display:flex;overflow-x:auto;scrollbar-width:none;
-    position:sticky;top:0;z-index:100;
     box-shadow:0 2px 10px rgba(10,47,107,0.08);
   }
   .nav::-webkit-scrollbar { display:none; }
+  .nav-arrow {
+    display:none;
+    position:absolute;top:0;bottom:2px;
+    width:36px;align-items:center;justify-content:center;
+    background:linear-gradient(to right,white 60%,transparent);
+    color:var(--az-principal);font-size:13px;
+    pointer-events:all;z-index:1;
+    transition:opacity 0.2s;
+    cursor:pointer;border:none;
+  }
+  .nav-arrow.right { right:0;background:linear-gradient(to left,white 60%,transparent); }
+  .nav-wrapper { position:sticky;top:0;z-index:100; }
+  .nav-has-scroll .nav-arrow { display:flex; }
   .nav-btn {
     padding:16px 26px;
     font-family:'Nunito',sans-serif;
@@ -556,7 +578,9 @@
 </section>
 
 <!-- NAV -->
-<nav class="nav">
+<div class="nav-wrapper">
+  <div class="nav-arrow"><i class="fa-solid fa-chevron-left"></i></div>
+  <nav class="nav">
   <button class="nav-btn active" onclick="showTab('agenda', this)">
     <i class="fa-solid fa-calendar-days"></i> Agenda
   </button>
@@ -570,6 +594,8 @@
     <i class="fa-solid fa-table-list"></i> Cronograma Detallado
   </button>
 </nav>
+  <div class="nav-arrow right"><i class="fa-solid fa-chevron-right"></i></div>
+</div>
 
 <!-- ══ AGENDA ══ -->
 <div id="agenda" class="section active">
@@ -966,6 +992,26 @@ filas.forEach(f => {
   }
   tbody.appendChild(tr);
 });
+
+// Nav arrows
+const navEl = document.querySelector('.nav');
+const navWrapper = document.querySelector('.nav-wrapper');
+const arrL  = document.querySelector('.nav-arrow:not(.right)');
+const arrR  = document.querySelector('.nav-arrow.right');
+function updateArrows() {
+  if (!navEl || !arrL) return;
+  const hasScroll = navEl.scrollWidth > navEl.clientWidth;
+  navWrapper.classList.toggle('nav-has-scroll', hasScroll);
+  arrL.style.opacity = navEl.scrollLeft > 10 ? '1' : '0';
+  arrR.style.opacity = navEl.scrollLeft < navEl.scrollWidth - navEl.clientWidth - 10 ? '1' : '0';
+}
+if (navEl) {
+  navEl.addEventListener('scroll', updateArrows);
+  window.addEventListener('resize', updateArrows);
+  arrL.addEventListener('click', () => { navEl.scrollBy({left:-150, behavior:'smooth'}); });
+  arrR.addEventListener('click', () => { navEl.scrollBy({left:150,  behavior:'smooth'}); });
+  updateArrows();
+}
 
 function showTab(id, btn) {
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
