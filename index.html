@@ -762,7 +762,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Finanzas · Gantt de Sesiones</h3></div>
-        </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-finanzas"></table></div>
     </div>
@@ -775,7 +774,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Operaciones · Gantt de Sesiones</h3></div>
-        </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-operaciones"></table></div>
     </div>
@@ -788,7 +786,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Nómina · Gantt de Sesiones</h3></div>
-        </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-nomina"></table></div>
     </div>
@@ -801,7 +798,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Comercial · Gantt de Sesiones</h3></div>
-        </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-comercial"></table></div>
     </div>
@@ -814,7 +810,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Retail · Gantt de Sesiones</h3></div>
-        </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-retail"></table></div>
     </div>
@@ -1191,7 +1186,7 @@ function showTooltip(e, ses) {
     tooltip.style.top  = (e.clientY - 10) + 'px';
   }
   clearTimeout(tooltipTimer);
-  tooltipTimer = setTimeout(hideTooltip, 7000);
+  tooltipTimer = setTimeout(hideTooltip, 4000);
 }
 function hideTooltip() {
   tooltip.classList.remove('visible');
