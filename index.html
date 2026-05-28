@@ -29,15 +29,31 @@
     color: var(--texto);
   }
 
-  /* fondo con patrón de puntos suave */
+  /* fondo con bon yurts decorativos */
   body::before {
     content: '';
     position: fixed; inset: 0; z-index: -1;
     background-color: var(--gris-fondo);
     background-image: radial-gradient(circle, #C8DFF2 1px, transparent 1px);
     background-size: 28px 28px;
-    opacity: 0.55;
   }
+  .bg-shapes {
+    position: fixed; inset: 0; z-index: -1;
+    pointer-events: none; overflow: hidden;
+  }
+  .bg-shape {
+    position: absolute;
+    background-image: url('geometrica_bonyurt.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.055;
+    filter: grayscale(30%) hue-rotate(200deg);
+  }
+  .bs1 { width:320px;height:400px; top:-80px; left:-60px;   transform:rotate(-25deg); }
+  .bs2 { width:260px;height:320px; top:30%;  right:-50px;   transform:rotate(15deg);  opacity:0.04; }
+  .bs3 { width:200px;height:250px; bottom:5%; left:8%;      transform:rotate(10deg);  opacity:0.035; }
+  .bs4 { width:180px;height:220px; bottom:10%; right:12%;   transform:rotate(-18deg); opacity:0.04; }
+  .bs5 { width:140px;height:175px; top:15%;  left:38%;      transform:rotate(30deg);  opacity:0.03; }
 
   /* ── TOPBAR ── */
   .topbar {
@@ -493,6 +509,14 @@
 </head>
 <body>
 
+<div class="bg-shapes">
+  <div class="bg-shape bs1"></div>
+  <div class="bg-shape bs2"></div>
+  <div class="bg-shape bs3"></div>
+  <div class="bg-shape bs4"></div>
+  <div class="bg-shape bs5"></div>
+</div>
+
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="tb-logo">GC</div>
@@ -530,7 +554,7 @@
 <!-- NAV -->
 <nav class="nav">
   <button class="nav-btn active" onclick="showTab('agenda', this)">
-    <i class="fa-solid fa-calendar-days"></i> Agenda y Gantt
+    <i class="fa-solid fa-calendar-days"></i> Agenda
   </button>
   <button class="nav-btn" onclick="showTab('participantes', this)">
     <i class="fa-solid fa-users"></i> Participantes
@@ -553,10 +577,25 @@
     </div>
   </div>
 
+  <!-- Contexto -->
+  <div style="background:white;border-radius:14px;border:1.5px solid var(--borde);padding:24px 28px;margin-bottom:28px;box-shadow:0 2px 8px rgba(10,47,107,0.05);">
+    <p style="font-size:14px;color:var(--texto-sec);line-height:1.8;margin-bottom:12px;">
+      La estrategia de pruebas del proyecto <strong style="color:var(--az-oscuro)">ALMA</strong> se organiza en <strong style="color:var(--az-oscuro)">tres momentos</strong> que abarcan desde el 25 de mayo hasta el 30 de junio de 2026, con miras a garantizar una salida en vivo exitosa el <strong style="color:var(--az-oscuro)">12 de julio de 2026</strong>.
+    </p>
+    <p style="font-size:14px;color:var(--texto-sec);line-height:1.8;margin-bottom:16px;">
+      Cada momento tiene un foco específico: integraciones técnicas, cierre financiero y procesos transversales, y finalmente operaciones, comercial y retail. Participan testers de <strong style="color:var(--az-oscuro)">Colombia, Ecuador y Venezuela</strong>, acompañados por embajadores, gestores de prueba y el equipo CDA.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      <span style="display:inline-flex;align-items:center;gap:6px;background:var(--az-fondo);color:var(--az-medio);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;"><i class="fa-solid fa-circle-check"></i> Haz clic en el cronograma para ver el detalle</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:var(--az-fondo);color:var(--az-medio);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;"><i class="fa-solid fa-users"></i> +50 testers activos</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;background:var(--az-fondo);color:var(--az-medio);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;"><i class="fa-solid fa-calendar"></i> 5 áreas · 37 días</span>
+    </div>
+  </div>
+
   <div class="gantt-wrap">
     <div class="gantt-head-bar">
       <i class="fa-solid fa-chart-gantt"></i>
-      <h3>Diagrama de Gantt · Cronograma de Pruebas</h3>
+      <h3>Cronograma de Pruebas</h3>
     </div>
     <div class="gantt-scroll">
       <table class="gantt-table">
