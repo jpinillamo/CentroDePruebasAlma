@@ -1237,7 +1237,14 @@ function buildGantt(areaKey) {
         bar.addEventListener('mousemove', (e) => showTooltip(e, ses));
         bar.addEventListener('mouseleave', hideTooltip);
         bar.addEventListener('click', () => navToCard(areaKey, ses.titulo));
+        bar.addEventListener('touchstart', (e) => {
+          bar._touchStartX = e.touches[0].clientX;
+          bar._touchStartY = e.touches[0].clientY;
+        }, {passive:true});
         bar.addEventListener('touchend', (e) => {
+          const dx = Math.abs(e.changedTouches[0].clientX - (bar._touchStartX||0));
+          const dy = Math.abs(e.changedTouches[0].clientY - (bar._touchStartY||0));
+          if (dx > 8 || dy > 8) return; // fue swipe, no tap
           e.preventDefault();
           showTooltip(e.changedTouches[0], ses);
           setTimeout(() => navToCard(areaKey, ses.titulo), 600);
