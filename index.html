@@ -1191,7 +1191,7 @@ function navToCronograma(areaKey) {
   setTimeout(() => { document.getElementById('cronograma').scrollIntoView({behavior:'smooth'}); }, 100);
 }
 
-function navToCard(areaKey, titulo) {
+function navToCard(areaKey, titulo, fecha) {
   // 1. Cambiar a pestaña cronograma
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -1209,12 +1209,16 @@ function navToCard(areaKey, titulo) {
   buildGantt(areaKey);
   buildSesiones(areaKey);
 
-  // 4. Scroll a la tarjeta con doble timeout para asegurar render
+  // 4. Scroll a la tarjeta correcta por título Y fecha
   const scrollToCard = () => {
     const cards = document.querySelectorAll(`#ses-${areaKey} .ses-card`);
     let found = false;
     cards.forEach(c => {
-      if (c.querySelector('h4') && c.querySelector('h4').textContent.trim() === titulo.trim()) {
+      const h4 = c.querySelector('h4');
+      const dateEl = c.querySelector('.ses-date');
+      const tituloOk = h4 && h4.textContent.trim() === titulo.trim();
+      const fechaOk  = !fecha || (dateEl && dateEl.textContent.includes(fecha));
+      if (tituloOk && fechaOk) {
         found = true;
         c.scrollIntoView({behavior:'smooth', block:'center'});
         c.style.outline = '3px solid var(--az-principal)';
@@ -1226,9 +1230,7 @@ function navToCard(areaKey, titulo) {
   };
 
   setTimeout(() => {
-    if (!scrollToCard()) {
-      setTimeout(scrollToCard, 400);
-    }
+    if (!scrollToCard()) setTimeout(scrollToCard, 400);
   }, 300);
 }
 
@@ -1262,7 +1264,7 @@ function buildGantt(areaKey) {
         bar.textContent = ses.titulo;
         bar.addEventListener('mousemove', (e) => showTooltip(e, ses));
         bar.addEventListener('mouseleave', hideTooltip);
-        bar.addEventListener('click', () => navToCard(areaKey, ses.titulo));
+        bar.addEventListener('click', () => navToCard(areaKey, ses.titulo, ses.fecha));
         bar.addEventListener('touchstart', (e) => {
           bar._touchStartX = e.touches[0].clientX;
           bar._touchStartY = e.touches[0].clientY;
@@ -1273,7 +1275,7 @@ function buildGantt(areaKey) {
           if (dx > 8 || dy > 8) return; // fue swipe, no tap
           e.preventDefault();
           showTooltip(e.changedTouches[0], ses);
-          setTimeout(() => navToCard(areaKey, ses.titulo), 600);
+          setTimeout(() => navToCard(areaKey, ses.titulo, ses.fecha), 600);
         }, {passive:false});
         td.appendChild(bar);
       }
