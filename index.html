@@ -323,7 +323,140 @@
   .sop-card.mid  .sop-detail { color:rgba(255,255,255,0.7); }
   .sop-card.light .sop-detail { color:var(--texto-sec); }
 
-  /* ── FOOTER ── */
+  /* ── CRONOGRAMA DETALLADO ── */
+  .area-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
+  .area-btn {
+    padding:9px 20px; border-radius:100px;
+    font-family:'Nunito',sans-serif; font-weight:700; font-size:13px;
+    border:2px solid var(--borde); background:white; color:var(--texto-sec);
+    cursor:pointer; transition:all 0.2s; display:inline-flex; align-items:center; gap:7px;
+  }
+  .area-btn i { font-size:15px; }
+  .area-btn:hover { border-color:var(--az-principal); color:var(--az-principal); }
+  .area-btn.active { background:var(--az-oscuro); border-color:var(--az-oscuro); color:white; }
+
+  .area-panel { display:none; }
+  .area-panel.active { display:block; }
+
+  /* Gantt interactivo */
+  .ig-wrap {
+    background:white; border-radius:14px;
+    border:1.5px solid var(--borde);
+    overflow:hidden; margin-bottom:32px;
+    box-shadow:0 2px 12px rgba(10,47,107,0.06);
+  }
+  .ig-head {
+    background:var(--az-oscuro); padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .ig-head-left { display:flex; align-items:center; gap:10px; }
+  .ig-head i { font-size:18px; color:var(--az-claro); }
+  .ig-head h3 { font-family:'Nunito',sans-serif; font-weight:800; font-size:15px; color:white; }
+  .ig-legend { display:flex; gap:12px; }
+  .ig-leg-item { display:flex; align-items:center; gap:5px; font-size:11px; color:rgba(255,255,255,0.7); }
+  .ig-leg-dot { width:10px; height:10px; border-radius:2px; }
+
+  .ig-scroll { overflow-x:auto; }
+  .ig-table { width:100%; border-collapse:collapse; min-width:600px; }
+  .ig-table th {
+    padding:8px 10px; font-family:'Nunito',sans-serif;
+    font-weight:700; font-size:10px; letter-spacing:0.5px;
+    text-transform:uppercase; background:var(--az-fondo);
+    color:var(--texto-sec); border-bottom:1.5px solid var(--borde);
+    text-align:center; white-space:nowrap;
+  }
+  .ig-table th.row-lbl { text-align:left; min-width:180px; }
+  .ig-table td { padding:7px 10px; border-bottom:1px solid var(--az-fondo); vertical-align:middle; }
+  .ig-table tr:last-child td { border-bottom:none; }
+  .ig-table tr:hover td { background:#F7FBFF; cursor:pointer; }
+  .ig-row-label { font-family:'Nunito',sans-serif; font-weight:700; font-size:13px; color:var(--az-oscuro); }
+  .ig-row-label small { display:block; font-weight:400; font-size:11px; color:var(--texto-sec); margin-top:2px; }
+
+  .ig-bar {
+    height:28px; border-radius:6px;
+    display:flex; align-items:center; padding:0 10px;
+    font-family:'Nunito',sans-serif; font-weight:700; font-size:11px;
+    color:white; cursor:pointer; transition:opacity 0.15s;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .ig-bar:hover { opacity:0.85; }
+  .ig-bar.az1 { background:var(--az-principal); }
+  .ig-bar.az2 { background:var(--az-suave); }
+  .ig-bar.az3 { background:var(--az-oscuro); }
+  .ig-bar.az4 { background:#2A5CA8; }
+  .ig-bar.az5 { background:#6AA3D5; }
+
+  /* Tooltip */
+  .ig-tooltip {
+    display:none; position:fixed; z-index:999;
+    background:var(--az-oscuro); color:white;
+    border-radius:10px; padding:14px 18px;
+    font-size:13px; max-width:300px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.2);
+    pointer-events:none;
+  }
+  .ig-tooltip.visible { display:block; }
+  .ig-tt-title { font-family:'Nunito',sans-serif; font-weight:800; font-size:14px; margin-bottom:8px; color:var(--az-claro); }
+  .ig-tt-row { display:flex; gap:6px; margin-bottom:4px; font-size:12px; }
+  .ig-tt-label { color:rgba(255,255,255,0.55); min-width:70px; }
+  .ig-tt-val { color:white; font-weight:600; }
+
+  /* Detalle de sesiones */
+  .sesiones-title {
+    font-family:'Nunito',sans-serif; font-weight:900; font-size:20px;
+    color:var(--az-oscuro); margin-bottom:16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .sesiones-title i { color:var(--az-principal); font-size:20px; }
+  .sesiones-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; margin-bottom:40px; }
+
+  .ses-card {
+    background:white; border-radius:14px;
+    border:1.5px solid var(--borde);
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(10,47,107,0.05);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .ses-card:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(10,47,107,0.09); }
+  .ses-card-head {
+    background:var(--az-medio); padding:12px 16px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .ses-card-head h4 { font-family:'Nunito',sans-serif; font-weight:800; font-size:14px; color:white; }
+  .ses-date { font-size:11px; color:rgba(255,255,255,0.75); font-weight:600; }
+  .ses-card-body { padding:14px 16px; }
+  .ses-embajador {
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:10px; padding-bottom:10px;
+    border-bottom:1px solid var(--az-fondo);
+  }
+  .ses-emb-icon {
+    width:32px; height:32px; border-radius:8px;
+    background:var(--az-fondo);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .ses-emb-icon i { font-size:15px; color:var(--az-principal); }
+  .ses-emb-info { font-size:12px; }
+  .ses-emb-label { color:var(--gris); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700; }
+  .ses-emb-name { color:var(--az-oscuro); font-weight:700; font-size:13px; }
+  .ses-testers { margin-bottom:10px; }
+  .ses-testers-label { font-size:10px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700; color:var(--texto-sec); margin-bottom:6px; }
+  .ses-tester-chip {
+    display:inline-block; padding:3px 10px; border-radius:100px;
+    background:var(--az-fondo); color:var(--az-medio);
+    font-size:11px; font-weight:600; margin:2px 2px 2px 0;
+  }
+  .ses-procesos { }
+  .ses-proc-label { font-size:10px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700; color:var(--texto-sec); margin-bottom:6px; }
+  .ses-proc-list { list-style:none; display:flex; flex-direction:column; gap:4px; max-height:160px; overflow-y:auto; }
+  .ses-proc-list li { font-size:12px; color:var(--texto-sec); padding-left:14px; position:relative; line-height:1.4; }
+  .ses-proc-list li::before { content:'·'; position:absolute; left:0; color:var(--az-principal); font-weight:700; }
+  .ses-proc-list::-webkit-scrollbar { width:4px; }
+  .ses-proc-list::-webkit-scrollbar-track { background:var(--az-fondo); border-radius:2px; }
+  .ses-proc-list::-webkit-scrollbar-thumb { background:var(--borde); border-radius:2px; }
+
+  /* ── FIN CRONOGRAMA ── */
   footer {
     background:var(--az-oscuro);color:rgba(255,255,255,0.4);
     text-align:center;padding:28px;font-size:13px;margin-top:60px;
@@ -396,6 +529,9 @@
   </button>
   <button class="nav-btn" onclick="showTab('roles', this)">
     <i class="fa-solid fa-shield-halved"></i> Roles y Soporte
+  </button>
+  <button class="nav-btn" onclick="showTab('cronograma', this)">
+    <i class="fa-solid fa-table-list"></i> Cronograma Detallado
   </button>
 </nav>
 
@@ -594,6 +730,112 @@
   </div>
 </div>
 
+<!-- ══ CRONOGRAMA DETALLADO ══ -->
+<div id="cronograma" class="section">
+  <div class="sec-header">
+    <div class="sec-icon"><i class="fa-solid fa-table-list"></i></div>
+    <div>
+      <h2>Cronograma Detallado</h2>
+      <p>Gantt y sesiones por área · Datos reales del plan de pruebas</p>
+    </div>
+  </div>
+
+  <!-- Selector de área -->
+  <div class="area-tabs">
+    <button class="area-btn active" onclick="showArea('finanzas',this)"><i class="fa-solid fa-coins"></i> Finanzas</button>
+    <button class="area-btn" onclick="showArea('operaciones',this)"><i class="fa-solid fa-gear"></i> Operaciones</button>
+    <button class="area-btn" onclick="showArea('nomina',this)"><i class="fa-solid fa-file-invoice"></i> Nómina</button>
+    <button class="area-btn" onclick="showArea('comercial',this)"><i class="fa-solid fa-store"></i> Comercial</button>
+    <button class="area-btn" onclick="showArea('retail',this)"><i class="fa-solid fa-cart-shopping"></i> Retail</button>
+  </div>
+
+  <!-- FINANZAS -->
+  <div id="area-finanzas" class="area-panel active">
+    <div class="ig-wrap">
+      <div class="ig-head">
+        <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Finanzas · Gantt de Sesiones</h3></div>
+        <div class="ig-legend">
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 1</div>
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#4A90D9"></div>Semana 2</div>
+        </div>
+      </div>
+      <div class="ig-scroll"><table class="ig-table" id="gantt-finanzas"></table></div>
+    </div>
+    <p class="sesiones-title"><i class="fa-solid fa-calendar-days"></i> Sesiones de Finanzas</p>
+    <div class="sesiones-grid" id="ses-finanzas"></div>
+  </div>
+
+  <!-- OPERACIONES -->
+  <div id="area-operaciones" class="area-panel">
+    <div class="ig-wrap">
+      <div class="ig-head">
+        <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Operaciones · Gantt de Sesiones</h3></div>
+        <div class="ig-legend">
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 2</div>
+        </div>
+      </div>
+      <div class="ig-scroll"><table class="ig-table" id="gantt-operaciones"></table></div>
+    </div>
+    <p class="sesiones-title"><i class="fa-solid fa-calendar-days"></i> Sesiones de Operaciones</p>
+    <div class="sesiones-grid" id="ses-operaciones"></div>
+  </div>
+
+  <!-- NÓMINA -->
+  <div id="area-nomina" class="area-panel">
+    <div class="ig-wrap">
+      <div class="ig-head">
+        <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Nómina · Gantt de Sesiones</h3></div>
+        <div class="ig-legend">
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 1</div>
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#4A90D9"></div>Semana 2</div>
+        </div>
+      </div>
+      <div class="ig-scroll"><table class="ig-table" id="gantt-nomina"></table></div>
+    </div>
+    <p class="sesiones-title"><i class="fa-solid fa-calendar-days"></i> Sesiones de Nómina</p>
+    <div class="sesiones-grid" id="ses-nomina"></div>
+  </div>
+
+  <!-- COMERCIAL -->
+  <div id="area-comercial" class="area-panel">
+    <div class="ig-wrap">
+      <div class="ig-head">
+        <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Comercial · Gantt de Sesiones</h3></div>
+        <div class="ig-legend">
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 2</div>
+        </div>
+      </div>
+      <div class="ig-scroll"><table class="ig-table" id="gantt-comercial"></table></div>
+    </div>
+    <p class="sesiones-title"><i class="fa-solid fa-calendar-days"></i> Sesiones de Comercial</p>
+    <div class="sesiones-grid" id="ses-comercial"></div>
+  </div>
+
+  <!-- RETAIL -->
+  <div id="area-retail" class="area-panel">
+    <div class="ig-wrap">
+      <div class="ig-head">
+        <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Retail · Gantt de Sesiones</h3></div>
+        <div class="ig-legend">
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 1</div>
+          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#4A90D9"></div>Semana 2</div>
+        </div>
+      </div>
+      <div class="ig-scroll"><table class="ig-table" id="gantt-retail"></table></div>
+    </div>
+    <p class="sesiones-title"><i class="fa-solid fa-calendar-days"></i> Sesiones de Retail</p>
+    <div class="sesiones-grid" id="ses-retail"></div>
+  </div>
+</div>
+
+<!-- Tooltip flotante -->
+<div class="ig-tooltip" id="igTooltip">
+  <div class="ig-tt-title" id="tt-title"></div>
+  <div class="ig-tt-row"><span class="ig-tt-label">Fecha:</span><span class="ig-tt-val" id="tt-fecha"></span></div>
+  <div class="ig-tt-row"><span class="ig-tt-label">Embajador:</span><span class="ig-tt-val" id="tt-emb"></span></div>
+  <div class="ig-tt-row"><span class="ig-tt-label">Testers:</span><span class="ig-tt-val" id="tt-test"></span></div>
+</div>
+
 <footer>
   <i class="fa-solid fa-circle"></i>
   Centro de Pruebas <strong>ALMA</strong>
@@ -695,7 +937,230 @@ function showTab(id, btn) {
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
+  if (id === 'cronograma') { buildGantt('finanzas'); buildSesiones('finanzas'); }
 }
+
+// ─── CRONOGRAMA DETALLADO ─────────────────────────────────
+const AREAS = {
+  finanzas: {
+    dias: ['Mar 9 Jun','Mié 10 Jun','Jue 11 Jun','Vie 12 Jun','Mar 16 Jun','Mié 17 Jun'],
+    sesiones: [
+      { titulo:'Costos', fecha:'Mar 9 Jun', embajador:'Marcela Buitrago', testers:['Mario Guzman'], color:'az1',
+        procesos:['Devolver costo PA','Devolver ML','Devolución de subrepartos CO','Devolver la liq de una orden','Liq de una orden','Ejecución de subreparto','Revalorización de tarifas','Correr ML y PA','Revisión procesos costo','Verificación de trx (Script)'] },
+      { titulo:'PS AF (AM)', fecha:'Mar 9 Jun', embajador:'Sandra Chacón', testers:['Jhon Velasquez','Karen Garcia','Sandra Chacón'], color:'az2',
+        procesos:['Karen crea proyectos en PS','Incorporar Jose Guanarita a compras'] },
+      { titulo:'Impuestos', fecha:'Mar 9 Jun', embajador:'Brayan Casallas', testers:['Brayan Casallas'], color:'az3',
+        procesos:['Prorrateo IVA Ecuador','Revisión facturación'] },
+      { titulo:'Tesorería', fecha:'Mar 9 Jun', embajador:'Dora Rodriguez / Angye Puentes', testers:['Dora Rodriguez','Jorge Rey','Monica Rivera','Diego Correa','Alexis Pérez','Marco Espinel'], color:'az4',
+        procesos:['Cargue Bancos y fiducias','Compensación Recaudo','Compensación Pagos','Costo amortizado / Cierre deuda','Valoración derivados forwards','Cierre cambiario'] },
+      { titulo:'CXP', fecha:'Mar 9 Jun', embajador:'Yaneth Orjuela', testers:['Nathalia Castañeda'], color:'az5',
+        procesos:['OC de proyectos','Envío de Invoway','Contabilización facturas','Elaboración escenarios Plataform, Alliance, Libera','Registro manual'] },
+      { titulo:'Contabilidad', fecha:'Mar 9 Jun', embajador:'Angie Gabriela González', testers:['Diana Garnica','Ivonne Suarez','Angie González'], color:'az1',
+        procesos:['Registro comprobantes','Facturar desde contabilidad','NC desde contabilidad','Compensaciones','BOT RETAIL','Diferidos'] },
+      { titulo:'Cartera', fecha:'Mar 9 Jun', embajador:'Luisa Prada / Yenny Jimenez', testers:['Martha López','Julieth Sánchez','Luisa Prada'], color:'az2',
+        procesos:['Cruce pagos manual','Cruce pagos automático','BOT Grandes Superficies','Cambio de asignaciones','Cruce de saldos','Registro de provisión cartera'] },
+      { titulo:'Costos', fecha:'Mié 10 Jun', embajador:'Marcela Buitrago', testers:['Juan Intencipa','Marcela Buitrago'], color:'az1',
+        procesos:['Validación de reclasificaciones','Provisiones logistica','Top downs'] },
+      { titulo:'PS AF (AM)', fecha:'Mié 10 Jun', embajador:'Sandra Chacón', testers:['Jhon Velasquez','Karen Garcia','Sandra Chacón'], color:'az2',
+        procesos:['Operación de alta baja de AF','Corrida de Depreciaciones','Factura de venta de AF','Todas las trx del script'] },
+      { titulo:'Impuestos', fecha:'Mié 10 Jun', embajador:'Brayan Casallas / Omar Nieto', testers:['Juliana Rico','Brayan Casallas','Omar Nieto'], color:'az3',
+        procesos:['Provisiones geografias impuestos'] },
+      { titulo:'Tesorería', fecha:'Mié 10 Jun', embajador:'Dora Rodriguez / Angye Puentes', testers:['Diego Correa','Angye Puentes','Alexis Pérez','Marco Espinel'], color:'az4',
+        procesos:['Pagos y extractos','Plataform / Alliance / Libera','Generar pago nómina','Continuación compensación recaudo'] },
+      { titulo:'CXP', fecha:'Mié 10 Jun', embajador:'Yaneth Orjuela', testers:['Yeraldine Monroy'], color:'az5',
+        procesos:['Legalización anticipos','Reembolsos','Legalización Tcorporativas','Gastos de viaje (TRIP)'] },
+      { titulo:'Contabilidad', fecha:'Mié 10 Jun', embajador:'Angie Gabriela González', testers:['Juan Camilo Puentes','Sandra Milena Cortes','Leidy Torres'], color:'az1',
+        procesos:['Revisión de tasas de cierre','Diferencia en cambio','Registro de forward y bifurcación','BOT PPT Encuesta DANE','Arrendamiento financiero'] },
+      { titulo:'Planeación', fecha:'Mié 10 Jun', embajador:'Laura Valentina Hoyos', testers:['Sebastian Gross','Laura Ochoa','Manuela Castañeda','Santiago Gallego'], color:'az2',
+        procesos:['Revisión Cargue Comprobante Devoluciones','Devolver TD Devoluciones','Cierre Venta Bruta','Conciliación Venta Neta','Correr TD Descuento'] },
+      { titulo:'Costos', fecha:'Jue 11 Jun', embajador:'Marcela Buitrago', testers:['Jhon Tinjaca'], color:'az1',
+        procesos:['Driver de Al y Transp','Subreparto de sop op'] },
+      { titulo:'PS AF (AM)', fecha:'Jue 11 Jun', embajador:'Sandra Chacón', testers:['Jhon Velasquez','Karen Garcia','Sandra Chacón'], color:'az2',
+        procesos:['Operación de alta y baja de AF','Corrida de Depreciaciones','Factura de venta de AF'] },
+      { titulo:'Impuestos', fecha:'Jue 11 Jun', embajador:'Brayan Casallas / Omar Nieto', testers:['Juliana Rico'], color:'az3',
+        procesos:['Kardex fiscal','Certificados Ret.Numrot Ecuador y col'] },
+      { titulo:'Contabilidad', fecha:'Jue 11 Jun', embajador:'Angie Gabriela González', testers:['Sandra Milena Cortes'], color:'az1',
+        procesos:['Traslado de saldos','Cierre de periodo','Creación de cuentas / cecos','Descargar balance','Rev de saldos entre módulos'] },
+      { titulo:'PS AF (AM)', fecha:'Vie 12 Jun', embajador:'Sandra Chacón', testers:['Jhon Velasquez','Karen Garcia'], color:'az2',
+        procesos:['Corrida de Depreciaciones','Factura de venta de AF','Todas las trx del script'] },
+      { titulo:'Impuestos', fecha:'Vie 12 Jun', embajador:'Brayan Casallas / Omar Nieto', testers:['Carol Parra','Juliana Rico','Omar Nieto'], color:'az3',
+        procesos:['Provision Renta','Revisión reporte impuestos Geografias y Col'] },
+      { titulo:'Contabilidad', fecha:'Vie 12 Jun', embajador:'Angie Gabriela González', testers:['Erik Fabian Bello'], color:'az1',
+        procesos:['Utilidad empleados (Ecuador)','Registro MPP'] },
+      { titulo:'Costos · Cierre', fecha:'Mar 16 Jun', embajador:'Marcela Buitrago', testers:['Equipo costos'], color:'az1',
+        procesos:['Liberación costo estándar','Revisión salidas de inventarios','Liq de OP y OM','Liquidación ML / Costo PA'] },
+      { titulo:'Contabilidad · Cierre', fecha:'Mar 16 Jun', embajador:'Angie Gabriela González', testers:['Gabi','Erik'], color:'az1',
+        procesos:['Importar inf LucaNet'] },
+      { titulo:'Planeación · Cierre', fecha:'Mié 17 Jun', embajador:'Laura Valentina Hoyos', testers:['Sebastian Gross','Laura Ochoa','Manuela Castañeda','Santiago Gallego','Juan Diego Ávila','Deisy Quevedo'], color:'az2',
+        procesos:['Revisión Cargue Comprobantes Gasto','Liquidación Órdenes Internas','Asignados / Redistribuidos','Top Downs Comercial','Subrepartos Administrativos','Descargar KE30'] },
+    ]
+  },
+  operaciones: {
+    dias: ['Mar 16 Jun','Mié 17 Jun','Jue 18 Jun'],
+    sesiones: [
+      { titulo:'Leches', fecha:'Mar 16 Jun', embajador:'Ferney Gutierrez', testers:['Ferney Gutierrez'], color:'az1',
+        procesos:['Creación OC leches','Validar Reporte precio de Leche','Generar planillas de recolección','Registrar volúmenes','Plan de muestreo de calidad','Liquidar fletes','Proceso de liquidación del precio de la leche'] },
+      { titulo:'Traslados EWM', fecha:'Mar 16 Jun', embajador:'Karen Reyes / Valentina Cubillos', testers:['Edwin Fuentes','James Bocanegra','Silvana Londoño','Angel Bustos','Marvin Franco'], color:'az2',
+        procesos:['Creación pedido de traslado entre centros','Creación Entrega de salida','Creación de transporte','Crear Tareas de Almacén','Confirmar tareas','Confirmar salida de mercancia','Visualización del tránsito'] },
+      { titulo:'Traslados IM', fecha:'Mar 16 Jun', embajador:'Karen Reyes / Valentina Cubillos', testers:['Edwin Fuentes','Ángel Moreno','James Ramirez','Alvaro Sanchez','Karol Melo'], color:'az3',
+        procesos:['Creación pedido de traslado','Creación Entrega de salida','Creación de transporte','Confirmar salida','Visualización del tránsito'] },
+      { titulo:'Producción y Calidad', fecha:'Mar 16 Jun', embajador:'Camilo Pacheco / Juan Carlos Berrio', testers:['Juan Carlos Lancheros','Leidy Rodriguez','Camilo Borda','Daniel Huertas','Hosman Pinto','Adrian Mazo'], color:'az4',
+        procesos:['Creación de Orden de producción','Liberación de Orden','Consumos Orden de Producción','Cierre de orden','Buscar lotes de inspección','Ingresar resultados de calidad','Dar decisión de empleo','Trazabilidad'] },
+      { titulo:'Compras', fecha:'Mar 16 Jun', embajador:'Elizabeth Cuevas / Paola Guayacan', testers:['Dani Cardona','Felipe Torres','Santiago Gomez','Manuel Espitia','Amy Lopez'], color:'az5',
+        procesos:['Generación de contratos marco SAP','Liberación de contrato marco','Liberación de Orden de Compra','Generación de la Orden de Compra','MB51 Consumos e Ingresos','Recepción de Mercancía'] },
+      { titulo:'Transmisión pedidos T1', fecha:'Mié 17 Jun', embajador:'Valentina Cubillos / Gabriel Amado', testers:['Martin Navas','Martha Pullotasig','William Heredia','James Bocanegra','Silvana Londoño'], color:'az1',
+        procesos:['Captura de pedido','Transmisión de pedido (Carvajal - Amovil)','Reserva del pedido','Planificación del transporte (TMS)','Generación de picking','Facturar','Revisión de facturas DIAN','Impresión de facturas'] },
+      { titulo:'Transmisión pedidos T2', fecha:'Mié 17 Jun', embajador:'Valentina Cubillos / Gabriel Amado', testers:['Martin Navas','Brian Zuñiga','Javier Roa','Oscar Valencia'], color:'az2',
+        procesos:['Captura de pedido','Transmisión de pedido','Reserva de pedido','Creación de transporte','Generación de picking'] },
+      { titulo:'Logística Inversa', fecha:'Mié 17 Jun', embajador:'Johann Sebastian Guerrero', testers:['Wilson Gomez','Henry Perez','Laura Cuervo','Jonathan Valencia'], color:'az3',
+        procesos:['Creación de pedido de Devolución','Creación de Entrega','Creación Nota Crédito','Traslado entre almacenes','Envío de Nota a gosocket'] },
+      { titulo:'Traslado Plantas', fecha:'Mié 17 Jun', embajador:'Valentina Cubillos / Jorge Millan', testers:['James Bocanegra','James Ramirez','Silvana Londoño'], color:'az4',
+        procesos:['Creación Traslado Interno','Consultar Entrega Entrante','Crear Tareas de Almacén','Confirmar tareas','Confirmar Entrada de mercancia'] },
+      { titulo:'Traslado Almacenes', fecha:'Jue 18 Jun', embajador:'Valentina Cubillos / Jorge Millan', testers:['James Bocanegra','Carlos Mesa','Angel Bustos','Marvin Franco','Karol Melo'], color:'az1',
+        procesos:['Generación de pedido (Planta)','Reserva de pedido','Separación por RF','Confirmación de Picking','Salida de mercancia','Generación de remisión'] },
+      { titulo:'Inventarios', fecha:'Jue 18 Jun', embajador:'Valentina Cubillos / Jorge Millan', testers:['Jhonny Martinez','Robert Ruiz','William Jaramillo','Carlos Meza','Cristian Forero'], color:'az2',
+        procesos:['Crear documento para inventario','Confirmación de rateos','Verificar finalización de conteo','Visualización de Diferencias','Compensar diferencias en ERP'] },
+      { titulo:'Multiempaques (Kardex)', fecha:'Jue 18 Jun', embajador:'Valentina Cubillos / Jorge Millan', testers:['Johan Castro','James Davinson','Daniel Perez','Angel Bustos','Marvin Franco'], color:'az3',
+        procesos:['Validación del visor','Creación del pedido','Generación de tareas','Generación de picking','Confirmación - salida de mercancia'] },
+      { titulo:'Mantenimiento', fecha:'Jue 18 Jun', embajador:'Jose Zambrano', testers:['Diego Antivar'], color:'az4',
+        procesos:['Creación de avisos','Tratamiento de avisos','Administrar y programar orden de trabajo','Notificación de actividades','Liquidación de órdenes'] },
+    ]
+  },
+  nomina: {
+    dias: ['Mar 9 Jun','Vie 12 Jun','Mar 16 Jun'],
+    sesiones: [
+      { titulo:'Nómina Colombia · Maestros', fecha:'Mar 9 Jun', embajador:'Patricia Vera', testers:['Monica Poveda','Andrea Vargas'], color:'az1',
+        procesos:['Integración','Novedades de Ingreso empleados','Novedades Cambio de Datos','Cambios tipos de contrato','Cambios areas de Personal','Cambios de Cargo','Datos Bancarios','Datos Familiares','Recontratación','Asignación de horario de trabajo'] },
+      { titulo:'Nómina Ecuador · Maestros', fecha:'Mar 9 Jun', embajador:'Patricia Vera', testers:['Monica Poveda','Andrea Vargas'], color:'az2',
+        procesos:['Integración','Novedades de Ingreso empleados','Novedades de cambios de salario','Novedades de prestamos','Cambios tipos de contrato','Datos Bancarios','Liquidación de Nómina','Generación de reportes'] },
+      { titulo:'Nómina Venezuela · Maestros', fecha:'Mar 9 Jun', embajador:'Patricia Vera', testers:['Andrea Vargas'], color:'az3',
+        procesos:['Integración','Novedades de Ingreso empleados','Cambios tipos de contrato','Cambios de Cargo','Datos Bancarios','Liquidación de Nómina'] },
+      { titulo:'Tiempos y Novedades', fecha:'Vie 12 Jun', embajador:'Patricia Vera', testers:['Leidy Gomez','Alexandra Rojas'], color:'az1',
+        procesos:['Integración marcaciones arquero','Ejecución Job Tiempos','Novedades de Tiempos - PY','Novedades IF 2010','Verificación calculo de horas extras','Novedades IT 0835','Novedades IT 0057','Novedades IT 0045'] },
+      { titulo:'Novedades Especiales', fecha:'Vie 12 Jun', embajador:'Patricia Vera', testers:['Leidy Gomez','Alexandra Rojas','Angela Delgado'], color:'az2',
+        procesos:['Novedades IT 0014','Novedades IT 0015','Novedades IT PA40','Aprobación y rechazo de Auxilios','Novedades IT 831','Novedades de cambios de salario','Novedades IT 2001'] },
+      { titulo:'Liquidación y Pagos', fecha:'Mar 16 Jun', embajador:'Patricia Vera', testers:['Danna Avila','Andrea Vargas','Bibiana Chaparro'], color:'az1',
+        procesos:['Liberación Comprobantes de pago','Aprobación de Pago de Nómina','Liquidación de Nómina Regular y Correctivas','Verificación Cálculo seguridad social','Verificación Cálculo Provisiones','Verificación Cálculo vacaciones','Reportes - Seguridad Social','Pagos Aportes Voluntarios','Pagos AFC','Pagos FEVAL','Pagos LIBRANZAS','Asientos contables nóminas'] },
+    ]
+  },
+  comercial: {
+    dias: ['Mar 16 Jun','Mié 17 Jun','Jue 18 Jun'],
+    sesiones: [
+      { titulo:'Pedidos Proveedores', fecha:'Mar 16 Jun', embajador:'Gabriel Amado / Alvaro Vives / Juan Jose Rodriguez', testers:['Hector Alfonso Sanabria'], color:'az1',
+        procesos:['Solicitud de pedidos de proveedores - EDI','Solicitud de pedidos de proveedores - Amovil'] },
+      { titulo:'Pedidos y Transmisión', fecha:'Mié 17 Jun', embajador:'Gabriel Amado / Alvaro Vives / Juan Jose Rodriguez', testers:['Hector Alfonso Sanabria'], color:'az2',
+        procesos:['Pedidos Amovil','Pedidos EDI'] },
+      { titulo:'Notas Crédito y Bajas', fecha:'Jue 18 Jun', embajador:'Gabriel Amado / Alvaro Vives / Juan Jose Rodriguez', testers:['Hector Alfonso Sanabria'], color:'az1',
+        procesos:['Notas crédito Amovil','Desde SAP bajas de producto','Desde SAP legalización de gastos'] },
+    ]
+  },
+  retail: {
+    dias: ['Mar 9 Jun','Mié 10 Jun','Mar 16 Jun','Mié 17 Jun','Jue 18 Jun'],
+    sesiones: [
+      { titulo:'Finanzas Retail', fecha:'Mar 9 Jun', embajador:'Cristian Alejandro Ortiz', testers:['Deisy Mayerli Quevedo Medina'], color:'az1',
+        procesos:['Seguimiento al gasto','Rentabilidad PA','Gasto - Reporte Libro de Caja','Costo - libro mayor','Costo - Reporte Costo Venta','Costo - Crear orden de fabricación CO','Cargue masivo ordenes de fabricación'] },
+      { titulo:'Recaudo', fecha:'Mar 9 Jun', embajador:'Cristian Alejandro Ortiz', testers:['Alexis Perez'], color:'az2',
+        procesos:['Integración de recaudo'] },
+      { titulo:'Talento Retail', fecha:'Mié 10 Jun', embajador:'Cristian Alejandro Ortiz', testers:['Juan Nicolas Sanchez Moya'], color:'az3',
+        procesos:['Cargue de horarios personal','Notificaciones de Evaluación Personal','Resultado de Evaluación Personal','Ingreso de tiempos','Cargue de nomina','Reserva dotación','ZFI_REEMBOLSOS_CAJA'] },
+      { titulo:'Compras Retail', fecha:'Mar 16 Jun', embajador:'Cristian Alejandro Ortiz', testers:['Omaira Lucia Gonzales'], color:'az1',
+        procesos:['Compras (Crear pedido)','Compras (Modificar pedido)','Compras (Liberación de Pedidos)','Compras (Entrada mercancias)','Compras (Crear entreda entrante)','Compras (Reserva de una Factura)','Compras (Hoja de entrada de servicio)'] },
+      { titulo:'Producción Retail', fecha:'Mié 17 Jun', embajador:'Cristian Alejandro Ortiz', testers:['Ana Camila Avellaneda'], color:'az2',
+        procesos:['Crear Orden de Proceso','Modificar Orden de Proceso','Notificación Orden de Proceso','Modificar Orden Masivamente','Validar Ordenes de proceso','Visualización de listas de pedidos'] },
+      { titulo:'Inventario Retail', fecha:'Jue 18 Jun', embajador:'Cristian Alejandro Ortiz', testers:['Nelson Javier Castro','Oscar Andres Maldonado'], color:'az3',
+        procesos:['Consumos y bajas','Consulta de inventario','Consulta de traspasos','Crear y Modificar pedidos','Crear y Modificar Entregas','Crear doc de Inventarios','Contabilizar inventarios','Cargue de inventario mensual'] },
+    ]
+  }
+};
+
+function buildGantt(areaKey) {
+  const area = AREAS[areaKey];
+  const dias = area.dias;
+  const table = document.getElementById('gantt-' + areaKey);
+  if (!table || table.innerHTML !== '') return;
+  const thead = document.createElement('thead');
+  const trH = document.createElement('tr');
+  const thL = document.createElement('th'); thL.className = 'row-lbl'; thL.textContent = 'Sesión';
+  trH.appendChild(thL);
+  dias.forEach(d => { const th = document.createElement('th'); th.textContent = d; th.style.minWidth='120px'; trH.appendChild(th); });
+  thead.appendChild(trH); table.appendChild(thead);
+  const procesos = [...new Set(area.sesiones.map(s => s.titulo))];
+  const tbody = document.createElement('tbody');
+  procesos.forEach(proc => {
+    const sesM = area.sesiones.filter(s => s.titulo === proc);
+    const tr = document.createElement('tr');
+    const tdL = document.createElement('td');
+    tdL.innerHTML = `<div class="ig-row-label">${proc}<small>${sesM[0].embajador.split('/')[0].trim()}</small></div>`;
+    tr.appendChild(tdL);
+    dias.forEach(dia => {
+      const td = document.createElement('td'); td.style.padding='5px 4px';
+      const ses = sesM.find(s => s.fecha === dia);
+      if (ses) {
+        const bar = document.createElement('div');
+        bar.className = `ig-bar ${ses.color}`;
+        bar.textContent = ses.testers.slice(0,2).join(', ') + (ses.testers.length > 2 ? '...' : '');
+        bar.addEventListener('mousemove', (e) => showTooltip(e, ses));
+        bar.addEventListener('mouseleave', hideTooltip);
+        td.appendChild(bar);
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+}
+
+function buildSesiones(areaKey) {
+  const area = AREAS[areaKey];
+  const container = document.getElementById('ses-' + areaKey);
+  if (!container || container.innerHTML !== '') return;
+  area.sesiones.forEach(s => {
+    const card = document.createElement('div'); card.className = 'ses-card';
+    card.innerHTML = `
+      <div class="ses-card-head">
+        <h4>${s.titulo}</h4>
+        <span class="ses-date"><i class="fa-solid fa-calendar-day"></i> ${s.fecha}</span>
+      </div>
+      <div class="ses-card-body">
+        <div class="ses-embajador">
+          <div class="ses-emb-icon"><i class="fa-solid fa-award"></i></div>
+          <div class="ses-emb-info">
+            <div class="ses-emb-label">Embajador</div>
+            <div class="ses-emb-name">${s.embajador}</div>
+          </div>
+        </div>
+        <div class="ses-testers">
+          <div class="ses-testers-label">Testers</div>
+          ${s.testers.map(t=>`<span class="ses-tester-chip">${t}</span>`).join('')}
+        </div>
+        <div class="ses-procesos">
+          <div class="ses-proc-label">Procesos (${s.procesos.length})</div>
+          <ul class="ses-proc-list">${s.procesos.map(p=>`<li>${p}</li>`).join('')}</ul>
+        </div>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+function showArea(key, btn) {
+  document.querySelectorAll('.area-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.area-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('area-'+key).classList.add('active');
+  buildGantt(key); buildSesiones(key);
+}
+
+const tooltip = document.getElementById('igTooltip');
+function showTooltip(e, ses) {
+  document.getElementById('tt-title').textContent = ses.titulo;
+  document.getElementById('tt-fecha').textContent = ses.fecha;
+  document.getElementById('tt-emb').textContent = ses.embajador.split('/')[0].trim();
+  document.getElementById('tt-test').textContent = ses.testers.slice(0,3).join(', ')+(ses.testers.length>3?'...':'');
+  tooltip.classList.add('visible');
+  tooltip.style.left=(e.clientX+16)+'px';
+  tooltip.style.top=(e.clientY-10)+'px';
+}
+function hideTooltip() { tooltip.classList.remove('visible'); }
 </script>
 </body>
 </html>
