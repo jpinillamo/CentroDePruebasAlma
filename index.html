@@ -46,14 +46,16 @@
     background-image: url('geometrica_bonyurt.png');
     background-size: contain;
     background-repeat: no-repeat;
-    opacity: 0.055;
+    opacity: 0.13;
     filter: grayscale(30%) hue-rotate(200deg);
   }
-  .bs1 { width:320px;height:400px; top:-80px; left:-60px;   transform:rotate(-25deg); }
-  .bs2 { width:260px;height:320px; top:30%;  right:-50px;   transform:rotate(15deg);  opacity:0.04; }
-  .bs3 { width:200px;height:250px; bottom:5%; left:8%;      transform:rotate(10deg);  opacity:0.035; }
-  .bs4 { width:180px;height:220px; bottom:10%; right:12%;   transform:rotate(-18deg); opacity:0.04; }
-  .bs5 { width:140px;height:175px; top:15%;  left:38%;      transform:rotate(30deg);  opacity:0.03; }
+  .bs1 { width:320px;height:400px; top:-80px;  left:-60px;  transform:rotate(-25deg); }
+  .bs2 { width:260px;height:320px; top:30%;    right:-50px; transform:rotate(15deg);  opacity:0.11; }
+  .bs3 { width:200px;height:250px; bottom:5%;  left:8%;     transform:rotate(10deg);  opacity:0.10; }
+  .bs4 { width:180px;height:220px; bottom:10%; right:12%;   transform:rotate(-18deg); opacity:0.11; }
+  .bs5 { width:140px;height:175px; top:15%;    left:38%;    transform:rotate(30deg);  opacity:0.09; }
+  .bs6 { width:240px;height:300px; top:50%;    left:-40px;  transform:rotate(20deg);  opacity:0.10; }
+  .bs7 { width:220px;height:275px; top:55%;    right:-35px; transform:rotate(-22deg); opacity:0.10; }
 
   /* ── TOPBAR ── */
   .topbar {
@@ -515,6 +517,8 @@
   <div class="bg-shape bs3"></div>
   <div class="bg-shape bs4"></div>
   <div class="bg-shape bs5"></div>
+  <div class="bg-shape bs6"></div>
+  <div class="bg-shape bs7"></div>
 </div>
 
 <!-- TOPBAR -->
@@ -1160,8 +1164,12 @@ function buildGantt(areaKey) {
         bar.textContent = ses.titulo;
         bar.addEventListener('mousemove', (e) => showTooltip(e, ses));
         bar.addEventListener('mouseleave', hideTooltip);
-        bar.addEventListener('touchstart', (e) => { e.preventDefault(); showTooltip(e.touches[0], ses); }, {passive:false});
         bar.addEventListener('click', () => navToCard(areaKey, ses.titulo));
+        bar.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          showTooltip(e.changedTouches[0], ses);
+          setTimeout(() => navToCard(areaKey, ses.titulo), 300);
+        }, {passive:false});
         td.appendChild(bar);
       }
       tr.appendChild(td);
