@@ -77,6 +77,19 @@
   .hc2 { width:220px;height:220px;bottom:-60px;right:180px; }
   .hc3 { width:140px;height:140px;top:40px;right:260px;background:rgba(255,255,255,0.07); }
 
+  .hero-vaca {
+    position: absolute;
+    bottom: 0; right: 60px;
+    height: 92%;
+    max-height: 420px;
+    object-fit: contain;
+    object-position: bottom;
+    z-index: 2;
+    filter: drop-shadow(-8px 0px 24px rgba(0,0,0,0.25));
+    pointer-events: none;
+  }
+  @media (max-width: 700px) { .hero-vaca { display: none; } }
+
   .hero-inner { position:relative;z-index:1;max-width:680px; }
 
   .hero-chip {
@@ -346,6 +359,7 @@
   <div class="hero-circle hc1"></div>
   <div class="hero-circle hc2"></div>
   <div class="hero-circle hc3"></div>
+  <img src="vaca_curiosa.png" class="hero-vaca" alt="Vaca Alpina">
   <div class="hero-inner">
     <div class="hero-chip">
       <i class="fa-solid fa-flask"></i>
