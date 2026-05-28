@@ -352,9 +352,6 @@
   .ig-head-left { display:flex; align-items:center; gap:10px; }
   .ig-head i { font-size:18px; color:var(--az-claro); }
   .ig-head h3 { font-family:'Nunito',sans-serif; font-weight:800; font-size:15px; color:white; }
-  .ig-legend { display:flex; gap:12px; }
-  .ig-leg-item { display:flex; align-items:center; gap:5px; font-size:11px; color:rgba(255,255,255,0.7); }
-  .ig-leg-dot { width:10px; height:10px; border-radius:2px; }
 
   .ig-scroll { overflow-x:auto; }
   .ig-table { width:100%; border-collapse:collapse; min-width:600px; }
@@ -391,15 +388,26 @@
     display:none; position:fixed; z-index:999;
     background:var(--az-oscuro); color:white;
     border-radius:10px; padding:14px 18px;
-    font-size:13px; max-width:300px;
+    font-size:13px; max-width:300px; width:max-content;
     box-shadow:0 8px 24px rgba(0,0,0,0.2);
     pointer-events:none;
+    transition: opacity 0.3s;
   }
   .ig-tooltip.visible { display:block; }
   .ig-tt-title { font-family:'Nunito',sans-serif; font-weight:800; font-size:14px; margin-bottom:8px; color:var(--az-claro); }
   .ig-tt-row { display:flex; gap:6px; margin-bottom:4px; font-size:12px; }
   .ig-tt-label { color:rgba(255,255,255,0.55); min-width:70px; }
   .ig-tt-val { color:white; font-weight:600; }
+  @media (max-width:600px) {
+    .ig-tooltip {
+      left: 50% !important;
+      transform: translateX(-50%);
+      top: auto !important;
+      bottom: 24px;
+      width: calc(100vw - 48px);
+      max-width: 100%;
+    }
+  }
 
   /* Detalle de sesiones */
   .sesiones-title {
@@ -754,9 +762,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Finanzas · Gantt de Sesiones</h3></div>
-        <div class="ig-legend">
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 1</div>
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#4A90D9"></div>Semana 2</div>
         </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-finanzas"></table></div>
@@ -770,8 +775,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Operaciones · Gantt de Sesiones</h3></div>
-        <div class="ig-legend">
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 2</div>
         </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-operaciones"></table></div>
@@ -785,9 +788,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Nómina · Gantt de Sesiones</h3></div>
-        <div class="ig-legend">
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 1</div>
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#4A90D9"></div>Semana 2</div>
         </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-nomina"></table></div>
@@ -801,8 +801,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Comercial · Gantt de Sesiones</h3></div>
-        <div class="ig-legend">
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 2</div>
         </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-comercial"></table></div>
@@ -816,9 +814,6 @@
     <div class="ig-wrap">
       <div class="ig-head">
         <div class="ig-head-left"><i class="fa-solid fa-chart-gantt"></i><h3>Retail · Gantt de Sesiones</h3></div>
-        <div class="ig-legend">
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#1A6FBF"></div>Semana 1</div>
-          <div class="ig-leg-item"><div class="ig-leg-dot" style="background:#4A90D9"></div>Semana 2</div>
         </div>
       </div>
       <div class="ig-scroll"><table class="ig-table" id="gantt-retail"></table></div>
@@ -921,7 +916,9 @@ filas.forEach(f => {
       const td = document.createElement('td');
       td.colSpan = f.fin - f.ini + 1;
       td.style.padding = '6px 4px';
-      td.innerHTML = `<div class="g-bar ${f.cls}">${f.label}</div>`;
+      const areaMap = {'Integraciones independientes':'finanzas','Cierre financiero':'finanzas','Nómina y gastos de viaje':'nomina','Datos maestros':'finanzas','Operaciones':'operaciones','Comercial':'comercial','Retail':'retail','Validaciones financieras':'finanzas'};
+      const areaKey = areaMap[f.label] || 'finanzas';
+      td.innerHTML = `<div class="g-bar ${f.cls}" style="cursor:pointer" title="Ver detalle" onclick="navToCronograma('${areaKey}')">${f.label}</div>`;
       tr.appendChild(td);
       i = f.fin + 1;
     } else {
@@ -1073,6 +1070,32 @@ const AREAS = {
   }
 };
 
+function navToCronograma(areaKey) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cronograma').classList.add('active');
+  document.querySelector('[onclick*="cronograma"]').classList.add('active');
+  const btn = document.querySelector(`.area-btn[onclick*="${areaKey}"]`);
+  if (btn) { showArea(areaKey, btn); }
+  else { buildGantt(areaKey); buildSesiones(areaKey); }
+  setTimeout(() => { document.getElementById('cronograma').scrollIntoView({behavior:'smooth'}); }, 100);
+}
+
+function navToCard(areaKey, titulo) {
+  navToCronograma(areaKey);
+  setTimeout(() => {
+    const cards = document.querySelectorAll(`#ses-${areaKey} .ses-card`);
+    cards.forEach(c => {
+      if (c.querySelector('h4') && c.querySelector('h4').textContent === titulo) {
+        c.scrollIntoView({behavior:'smooth', block:'center'});
+        c.style.outline = '3px solid var(--az-principal)';
+        c.style.boxShadow = '0 0 0 4px var(--az-claro)';
+        setTimeout(() => { c.style.outline=''; c.style.boxShadow=''; }, 2000);
+      }
+    });
+  }, 350);
+}
+
 function buildGantt(areaKey) {
   const area = AREAS[areaKey];
   const dias = area.dias;
@@ -1098,9 +1121,13 @@ function buildGantt(areaKey) {
       if (ses) {
         const bar = document.createElement('div');
         bar.className = `ig-bar ${ses.color}`;
-        bar.textContent = ses.testers.slice(0,2).join(', ') + (ses.testers.length > 2 ? '...' : '');
+        bar.style.cursor = 'pointer';
+        bar.title = `Ver detalle de ${ses.titulo}`;
+        bar.textContent = ses.titulo;
         bar.addEventListener('mousemove', (e) => showTooltip(e, ses));
         bar.addEventListener('mouseleave', hideTooltip);
+        bar.addEventListener('touchstart', (e) => { e.preventDefault(); showTooltip(e.touches[0], ses); }, {passive:false});
+        bar.addEventListener('click', () => navToCard(areaKey, ses.titulo));
         td.appendChild(bar);
       }
       tr.appendChild(td);
@@ -1151,16 +1178,25 @@ function showArea(key, btn) {
 }
 
 const tooltip = document.getElementById('igTooltip');
+let tooltipTimer = null;
+
 function showTooltip(e, ses) {
   document.getElementById('tt-title').textContent = ses.titulo;
   document.getElementById('tt-fecha').textContent = ses.fecha;
   document.getElementById('tt-emb').textContent = ses.embajador.split('/')[0].trim();
   document.getElementById('tt-test').textContent = ses.testers.slice(0,3).join(', ')+(ses.testers.length>3?'...':'');
   tooltip.classList.add('visible');
-  tooltip.style.left=(e.clientX+16)+'px';
-  tooltip.style.top=(e.clientY-10)+'px';
+  if (window.innerWidth > 600) {
+    tooltip.style.left = (e.clientX + 16) + 'px';
+    tooltip.style.top  = (e.clientY - 10) + 'px';
+  }
+  clearTimeout(tooltipTimer);
+  tooltipTimer = setTimeout(hideTooltip, 7000);
 }
-function hideTooltip() { tooltip.classList.remove('visible'); }
+function hideTooltip() {
+  tooltip.classList.remove('visible');
+  clearTimeout(tooltipTimer);
+}
 </script>
 </body>
 </html>
